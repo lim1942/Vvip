@@ -40,7 +40,6 @@ def load_channel():
             if ms < 99999:
                 channel['ms'] = ms
                 CHANNELS.append(channel)
-                break
     print('Channel load finish !!!')
 load_channel()
 
