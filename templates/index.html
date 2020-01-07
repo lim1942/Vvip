@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">   
+<head>   
+    <meta charset="UTF-8">   
+    <title>VVip</title>
+    <style type="text/css">   
+        *{   
+            margin: 0;   
+            padding: 0;
+            line-height: 0;
+        }   
+        div{
+            overflow：hidden;
+            width: 70%;
+            height: 20%;
+        }   
+        .center-in-center{   
+            position: absolute;   
+            top: 40%;
+            left: 15%;
+        }
+        #channels,#url,#bt,#source_text{
+            margin-top: 0.5%;
+            background-color: #EAEAEA;   
+            height: 20%;
+            display: inline-block;
+            border: 0;
+            padding: 0;
+            line-height: 0;
+        }
+
+        #channels{
+            border: 5%;
+            margin-left: 10% ;
+            width: 60%;
+            
+        }
+
+        #source_text{
+            background-color:white;
+            font-size: 50%;
+            margin-right: 10% ;
+            width: 18%;
+        }
+        
+        #url{
+            margin-left: 10% ;
+            width: 60%;
+        }
+        #bt{
+            width: 5%;
+        }
+
+    </style>   
+</head>   
+<body>   
+
+    <div class="center-in-center">
+        <select id="channels"></select>
+        <div id="source_text">解析源</div>
+        <input type="text" id="url" placeholder="请输入视频原始地址...">
+        <button type="button" id='bt'>解析</button>
+    </div>
+    <script>
+        function req_data(url){
+            var req = new XMLHttpRequest();
+            req.open('GET', url, false);
+            req.send(null);
+            if (req.status ==200){
+                return req.responseText;
+            }
+            alert("请求错误！！！");
+        }
+        function bt_click(){
+            url = input_item.value;
+            if (!url){return}
+            url_prefix = select_channel.value;
+            full_url = url_prefix + url;
+            window.location.href = full_url;
+        }
+
+        select_channel = document.getElementById("channels");
+        click_button = document.getElementById("bt");
+        input_item = document.getElementById("url");
+        url = window.location.protocol+'//'+window.location.host+'/get_channels';
+        datas = JSON.parse(req_data(url));
+        for (i = 0; i < datas.length; i++) { 
+            name  = i + '.通道：'+ datas[i]['name'] +'  -------------------------  '+ '延迟：'+datas[i]['ms'] + 'ms'
+            value = datas[i]['url']
+            select_channel.options.add(new Option(name,value));
+        }
+        click_button.onclick = bt_click;
+    
+    </script>
+</body>   
+</html>  
