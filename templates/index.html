@@ -85,7 +85,7 @@
         url = window.location.protocol+'//'+window.location.host+'/get_channels';
         datas = JSON.parse(req_data(url));
         for (i = 0; i < datas.length; i++) { 
-            name  = i + '.通道：'+ datas[i]['name'] +'  -------------------------  '+ '延迟：'+datas[i]['ms'] + 'ms'
+            name  = i + '.通道：'+ datas[i]['name'] +'  -----  '+ '延迟：'+datas[i]['ms'] + 'ms'
             value = datas[i]['url']
             select_channel.options.add(new Option(name,value));
         }
