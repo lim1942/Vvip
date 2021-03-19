@@ -1,2 +1,2 @@
 gevent==1.3.6
-Django==2.2
+Django==2.2.18
